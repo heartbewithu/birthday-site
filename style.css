@@ -1,19 +1,241 @@
-function scrollToLetter() {
-  document.getElementById('letter').scrollIntoView({
-    behavior: 'smooth'
-  });
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
+body {
+  font-family: 'Gaegu', cursive;
+  background: #eaf6ff;
+  overflow-x: hidden;
+  color: #4b4b4b;
+}
 
-const cards = document.querySelectorAll('.timeline-card');
+.hero {
+  height: 100vh;
+  background:
+    linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.5)),
+    repeating-linear-gradient(
+      45deg,
+      #dff3ff,
+      #dff3ff 30px,
+      #f5fbff 30px,
+      #f5fbff 60px
+    );
 
-window.addEventListener('scroll', () => {
-  cards.forEach(card => {
-    const top = card.getBoundingClientRect().top;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
 
-    if (top < window.innerHeight - 100) {
-      card.style.opacity = '1';
-      card.style.transform += ' scale(1)';
-    }
-  });
-});
+.hero-content {
+  text-align: center;
+  z-index: 2;
+}
+.logo {
+  font-size: 2rem;
+  color: #4f7cff;
+  margin-bottom: 20px;
+  text-shadow: 0 0 10px rgba(255,255,255,0.9);
+}
+
+.hero h1 {
+  font-size: 5rem;
+  line-height: 0.9;
+  color: white;
+  text-shadow:
+    4px 4px 0 #6db9ff,
+    8px 8px 20px rgba(0,0,0,0.15);
+}
+
+.subtitle {
+  margin-top: 25px;
+  font-size: 1.5rem;
+  color: #5c79c7;
+}
+
+button {
+  margin-top: 35px;
+  border: none;
+  padding: 15px 35px;
+  border-radius: 50px;
+  background: linear-gradient(90deg, #78c8ff, #b28dff);
+  color: white;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: 0 10px 25px rgba(112, 170, 255, 0.3);
+}
+
+button:hover {
+  transform: translateY(-4px) scale(1.03);
+}
+
+.cranes {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.crane {
+  position: absolute;
+  font-size: 4rem;
+  animation: float 5s infinite ease-in-out;
+}
+
+.blue {
+  left: 20%;
+  bottom: 20%;
+}
+
+.pink {
+  right: 20%;
+  top: 30%;
+}
+
+.yellow {
+  left: 15%;
+  top: 25%;
+}
+@keyframes float {
+  border-radius: 30px;
+  padding: 40px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+  position: relative;
+}
+
+.letter-title {
+  text-align: center;
+  font-size: 3rem;
+  color: #6f8cff;
+  margin-bottom: 25px;
+}
+
+.letter-tag {
+  display: inline-block;
+  background: #ff9ed6;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-size: 1.2rem;
+  margin-bottom: 25px;
+}
+
+.letter-content {
+  font-family: 'Patrick Hand', cursive;
+  font-size: 1.5rem;
+  line-height: 2;
+}
+
+.letter-content p {
+  margin-bottom: 20px;
+}
+
+.letter-stickers {
+  margin-top: 30px;
+  display: flex;
+  gap: 15px;
+  font-size: 2rem;
+}
+.timeline-section {
+  padding: 120px 20px;
+  background: #fffdf8;
+}
+
+.timeline-section h2 {
+  text-align: center;
+  font-size: 3rem;
+  margin-bottom: 80px;
+  color: #ff93c9;
+}
+
+.timeline {
+  position: relative;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.timeline::after {
+  content: '';
+  position: absolute;
+  width: 6px;
+  background: #b6dfff;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  margin-left: -3px;
+}
+
+.timeline-item {
+  padding: 10px 40px;
+  position: relative;
+  width: 50%;
+}
+
+.left {
+  left: 0;
+}
+
+.right {
+  left: 50%;
+}
+
+.timeline-card {
+  background: white;
+  padding: 20px;
+  border-radius: 25px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  transform: rotate(-2deg);
+}
+
+.right .timeline-card {
+  transform: rotate(2deg);
+}
+
+.timeline-card img {
+  width: 100%;
+  border-radius: 18px;
+  margin-bottom: 15px;
+}
+
+.timeline-card h3 {
+  color: #6d8fff;
+  margin-bottom: 10px;
+  font-size: 1.8rem;
+}
+
+.timeline-card p {
+  font-size: 1.2rem;
+  line-height: 1.7;
+}
+
+footer {
+  text-align: center;
+  padding: 50px;
+  background: #dff2ff;
+  color: #6b86d6;
+  font-size: 1.3rem;
+}
+
+@media screen and (max-width: 768px) {
+
+  .hero h1 {
+    font-size: 3rem;
+  }
+
+  .timeline::after {
+    left: 30px;
+  }
+
+  .timeline-item {
+    width: 100%;
+    padding-left: 70px;
+    padding-right: 20px;
+  }
+
+  .right {
+    left: 0;
+  }
+}
