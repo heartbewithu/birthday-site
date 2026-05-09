@@ -41,110 +41,75 @@
   </section>
 
 
-  <!-- 手写信页面 -->
-  <section class="letter-section" id="letter">
-
-    <div class="letter-card">
-      <div class="letter-title">
-       Birthday Letter Box
+<!-- 手写信页面 → 已改成信封打开模式 -->
+<section class="letter-section" id="letter">
+  <div class="envelope-container">
+    <div class="envelope" id="envelope">
+      <div class="envelope-flap"></div>
+      <div class="envelope-content">
+        <div class="letter-card">
+          <div class="letter-title">Birthday Letter Box</div>
+          <div class="letter-tag">To 我全世界最爱~~~</div>
+          <div class="letter-content">
+            <p>宝宝酱生日快乐！！！</p>
+            <p>又是一年生日啦，这已经是我们一起过的第九次生日，明年就是第十年咯！</p>
+            <p>好幸运能和你成为那么那么那么好的朋友TT 有点客套哈，但是我完全不敢想象过去没有你我咋度过呀🥹</p>
+            <p>去年一年我有点应接不暇，再加上进入了新的环境可能我们的联系有点少了依旧抱歉啊啊啊啊</p>
+            <p>但是我真的好感谢好感谢好感谢宝宝你在我难受的时候永远都在，我真的希望能和你做一辈子的朋友💕</p>
+            <p>希望新的一岁里，你可以继续做自己喜欢的事情，天天开心！！！</p>
+            <p>要是我们以后能一起去旅行、要拍很多照片、吃很多好吃的！我要在广东好好工作稳定下来，赚好多好多好多钱给你花！！！</p>
+            <p>♡♡♡</p>
+          </div>
+          <div class="letter-stickers">
+            <span>💌</span><span>⭐</span><span>🎀</span><span>☁️</span>
+          </div>
+        </div>
       </div>
-
-      <div class="letter-tag">
-       To 我全世界最爱~~~
-      </div>
-
-      <div class="letter-content">
-        <p>
-          宝宝酱生日快乐！！！
-        </p>
-
-        <p>
-          又是一年生日啦，这已经是我们一起过的第九次生日，明年就是第十年咯！
-        </p>
-
-        <p>
-          好幸运能和你成为那么那么那么好的朋友TT 有点客套哈，但是我完全不敢想象过去没有你我咋度过呀🥹
-     </p> 
-        <p>
-          去年一年我有点应接不暇，再加上进入了新的环境可能我们的联系有点少了依旧抱歉啊啊啊啊
- </p>
-         <p>
-          但是我真的好感谢好感谢好感谢宝宝你在我难受的时候永远都在，我真的希望能和你做一辈子的朋友💕
-
-        </p>
-
-        <p>
-          希望新的一岁里，你可以继续做自己喜欢的事情，天天开心！！！
-        </p>
-
-        <p>
-          要是我们以后能一起去旅行、要拍很多照片、吃很多好吃的！我要在广东好好工作稳定下来，赚好多好多好多钱给你花！！！
-        </p>
-
-        <p>
-          ♡♡♡
-        </p>
-      </div>
-
-      <div class="letter-stickers">
-        <span>💌</span>
-        <span>⭐</span>
-        <span>🎀</span>
-        <span>☁️</span>
-      </div>
+      <button class="open-btn" onclick="openEnvelope()">点击开启信件💌</button>
     </div>
-  </section>
-
-  <!-- 时间轴页面 -->
-  <section class="timeline-section">
-
-    <h2>OUR MEMORIES ✨</h2>
-
-    <div class="timeline">
-
-      <div class="timeline-item left">
-        <div class="timeline-card">
+  </div>
+</section>
+<!-- 时间轴页面 → 已改成翻页模式 -->
+<section class="timeline-section">
+  <h2>OUR MEMORIES ✨</h2>
+  <div class="magazine-container">
+    <div class="magazine-wrapper">
+      <div class="magazine-page active" data-page="1">
+        <div class="page-content">
           <img src="images/photo1.jpg" alt="photo">
           <h3>希望下次见面快点来</h3>
-          <p>
-            没分开多久但我已经好想好想你了！！！每次假期都是短暂的见一面但真的好幸福呀~
-          </p>
+          <p>没分开多久但我已经好想好想你了！！！每次假期都是短暂的见一面但真的好幸福呀~</p>
         </div>
       </div>
-
-      <div class="timeline-item right">
-        <div class="timeline-card">
+      <div class="magazine-page" data-page="2">
+        <div class="page-content">
           <img src="images/photo2.jpg" alt="photo">
           <h3>一起旅行</h3>
-          <p>
-            一边拍照一边迷路，但真的特别快乐。
-          </p>
+          <p>一边拍照一边迷路，但真的特别快乐。</p>
         </div>
       </div>
-
-      <div class="timeline-item left">
-        <div class="timeline-card">
+      <div class="magazine-page" data-page="3">
+        <div class="page-content">
           <img src="images/photo3.jpg" alt="photo">
           <h3>我们一起陪饼干去洗耳朵</h3>
-          <p>
-            今年开学前的最后一天还能见到你和小饼干，第二天在高铁上忍不住还偷偷苦了TT
-          </p>
+          <p>今年开学前的最后一天还能见到你和小饼干，第二天在高铁上忍不住还偷偷苦了TT</p>
         </div>
       </div>
-
-      <div class="timeline-item right">
-        <div class="timeline-card">
+      <div class="magazine-page" data-page="4">
+        <div class="page-content">
           <img src="images/photo4.jpg" alt="photo">
           <h3>生日快乐</h3>
-          <p>
-            希望未来还有更多很多很多年。
-          </p>
+          <p>希望未来还有更多很多很多年。</p>
         </div>
       </div>
-
     </div>
-  </section>
-
+    <div class="page-controls">
+      <button class="prev-btn" onclick="prevPage()">←</button>
+      <span class="page-indicator">1 / 4</span>
+      <button class="next-btn" onclick="nextPage()">→</button>
+    </div>
+  </div>
+</section>
 
   <!-- 底部 -->
   <footer>
