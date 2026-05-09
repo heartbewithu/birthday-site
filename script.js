@@ -17,3 +17,16 @@ window.addEventListener('scroll', () => {
     }
   });
 });
+function createStar() {
+  const star = document.createElement('div');
+  star.classList.add('star');
+
+  star.innerHTML = '⭐';
+
+  star.style.left = Math.random() * window.innerWidth + 'px';
+
+  star.style.fontSize = Math.random() * 20 + 10 + 'px';
+
+  star.style.animationDuration = Math.random() * 5 + 5 + 's';
+
+  document.que
