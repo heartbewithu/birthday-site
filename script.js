@@ -51,3 +51,54 @@ function createStar() {
 
   document.que
 }
+// 信件打开动画
+function openLetter() {
+
+  const envelope = document.getElementById('envelope');
+
+  envelope.classList.toggle('open');
+
+}
+
+
+
+// 相册翻页功能
+const pages = document.querySelectorAll('.book-page');
+
+let currentPage = 0;
+
+function showPage(index) {
+
+  pages.forEach((page) => {
+    page.classList.remove('show');
+  });
+
+  pages[index].classList.add('show');
+
+  document.getElementById('pageNum').innerText =
+    `${index + 1} / ${pages.length}`;
+}
+
+
+
+function nextBook() {
+
+  if(currentPage < pages.length - 1) {
+
+    currentPage++;
+
+    showPage(currentPage);
+  }
+}
+
+
+
+function prevBook() {
+
+  if(currentPage > 0) {
+
+    currentPage--;
+
+    showPage(currentPage);
+  }
+}
