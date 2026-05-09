@@ -1,22 +1,35 @@
-function scrollToLetter() {
-  document.getElementById('letter').scrollIntoView({
-    behavior: 'smooth'
-  });
+// 信封打开效果
+function openEnvelope() {
+  document.getElementById('envelope').classList.add('open');
 }
 
+// 翻页效果
+let currentPage = 1;
+const totalPages = document.querySelectorAll('.magazine-page').length;
 
-const cards = document.querySelectorAll('.timeline-card');
-
-window.addEventListener('scroll', () => {
-  cards.forEach(card => {
-    const top = card.getBoundingClientRect().top;
-
-    if (top < window.innerHeight - 100) {
-      card.style.opacity = '1';
-      card.style.transform += ' scale(1)';
+function updatePage() {
+  document.querySelectorAll('.magazine-page').forEach((page, index) => {
+    page.classList.remove('active');
+    if (index + 1 === currentPage) {
+      page.classList.add('active');
     }
   });
-});
+  document.querySelector('.page-indicator').textContent = `${currentPage} / ${totalPages}`;
+}
+
+function nextPage() {
+  if (currentPage < totalPages) {
+    currentPage++;
+    updatePage();
+  }
+}
+
+function prevPage() {
+  if (currentPage > 1) {
+    currentPage--;
+    updatePage();
+  }
+}
 function createStar() {
   const star = document.createElement('div');
   star.classList.add('star');
