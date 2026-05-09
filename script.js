@@ -26,36 +26,45 @@ let currentPage = 0;
 const pages = document.querySelectorAll('.book-page');
 const pageNumDisplay = document.getElementById('pageNum');
 
+// 初始化：设置初始层级，让第一页在最上面
+function initBook() {
+    pages.forEach((page, index) => {
+        page.style.zIndex = pages.length - index;
+    });
+}
+
 function updateBook() {
-  pages.forEach((page, index) => {
-    page.classList.remove('active', 'flipped');
-    
-    if (index === currentPage) {
-      page.classList.add('active');
-    } else if (index < currentPage) {
-      page.classList.add('flipped');
-    }
-  });
-  
-  pageNumDisplay.innerText = `${currentPage + 1} / ${pages.length}`;
+    pages.forEach((page, index) => {
+        if (index < currentPage) {
+            // 已翻过的页
+            page.classList.add('flipped');
+            page.style.zIndex = index; // 翻过去后，层级变低
+        } else {
+            // 未翻过的页
+            page.classList.remove('flipped');
+            page.style.zIndex = pages.length - index; // 还没翻的，前面的层级高
+        }
+    });
+    pageNumDisplay.innerText = `${currentPage + 1} / ${pages.length}`;
 }
 
 function nextPage() {
-  if (currentPage < pages.length - 1) {
-    currentPage++;
-    updateBook();
-  }
+    if (currentPage < pages.length - 1) {
+        currentPage++;
+        updateBook();
+    }
 }
 
 function prevPage() {
-  if (currentPage > 0) {
-    currentPage--;
-    updateBook();
-  }
+    if (currentPage > 0) {
+        currentPage--;
+        updateBook();
+    }
 }
 
-// 初始化显示第一页
+initBook();
 updateBook();
+
 
 // =========================
 // 飘落星星
