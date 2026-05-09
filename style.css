@@ -13,12 +13,12 @@ body {
 }
 
 /* ========================
-   首页 Hero
+   首页 Hero (精修版)
 ======================== */
 
 .hero {
   height: 100vh;
-
+  /* 保持原有的梦幻背景不变 */
   background:
     linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.5)),
     repeating-linear-gradient(
@@ -28,11 +28,9 @@ body {
       #f5fbff 30px,
       #f5fbff 60px
     );
-
   display: flex;
   justify-content: center;
   align-items: center;
-
   position: relative;
   overflow: hidden;
 }
@@ -40,31 +38,60 @@ body {
 .hero-content {
   text-align: center;
   z-index: 10;
+  width: 100%; /* 确保内容区撑满 */
+  padding: 0 20px; /* 侧边留白防止文字贴边 */
 }
 
 .logo {
-  font-size: 2rem;
+  font-family: 'Gaegu', cursive; /* 建议用你的可爱字体 */
+  font-size: 1.8rem;
   color: #4f7cff;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+  letter-spacing: 2px;
 }
 
 .hero h1 {
-  font-size: 5rem;
-  line-height: 0.9;
-
+  /* 关键修改：使用 clamp 让它在手机上大，但在平板上也不会无限大 */
+  /* clamp(最小值, 首选值, 最大值) */
+  font-size: clamp(4.5rem, 18vw, 8rem); 
+  
+  line-height: 0.85; /* 稍微再缩小行高，让两行文字紧贴，更具设计感 */
   color: white;
-
+  margin: 0;
+  font-weight: 700;
+  
+  /* 多层阴影：第一层是硬轮廓，第二层是软发光 */
   text-shadow:
-    4px 4px 0 #6db9ff,
-    8px 8px 20px rgba(0,0,0,0.15);
+    3px 3px 0 #6db9ff,
+    6px 6px 0 #a1d4ff,
+    10px 10px 25px rgba(109, 185, 255, 0.4);
+    
+  /* 字母间距稍微收紧 */
+  letter-spacing: -2px;
+  
+  /* 简单的上下浮动动画，增加灵动感 */
+  animation: floatingText 3s ease-in-out infinite;
 }
 
 .subtitle {
-  margin-top: 25px;
-  font-size: 1.5rem;
+  margin-top: 20px;
+  font-size: 1.4rem;
   color: #5c79c7;
+  font-family: 'Patrick Hand', cursive;
 }
 
+/* 浮动动画 */
+@keyframes floatingText {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* 针对超小屏幕（如小屏手机）的微调 */
+@media (max-width: 375px) {
+  .hero h1 {
+    font-size: 4rem;
+  }
+}
 button {
   border: none;
   padding: 15px 35px;
