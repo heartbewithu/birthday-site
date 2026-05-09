@@ -151,9 +151,6 @@ button:hover {
   }
 }
 
-/* ========================
-   纸鹤
-======================== */
 
 /* ========================
    首页贴纸
@@ -362,112 +359,47 @@ button:hover {
    相册翻页
 ======================== */
 
-/* 相册外层容器 */
-.book-wrapper {
-  perspective: 1500px; /* 增加 3D 透视感 */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 40px 10px;
-}
-
 .book {
   position: relative;
-  width: 95vw; /* 适配手机宽度 */
+  width: 90vw;
   max-width: 600px;
   height: 400px;
-  transition: transform 0.5s;
+  perspective: 1500px; /* 透视强度 */
 }
 
-/* 每一页的通用样式 */
 .book-page {
   position: absolute;
+  width: 100%;
+  height: 100%;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  transition: all 0.6s cubic-bezier(0.645, 0.045, 0.355, 1);
-  opacity: 0;
-  pointer-events: none;
-  transform-origin: left center;
+  transform-origin: left; /* 关键：绕左侧轴旋转 */
+  transform-style: preserve-3d;
+  transition: transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
+  z-index: 1;
 }
 
-/* 当前显示的页面 */
-.book-page.active {
-  opacity: 1;
-  z-index: 2;
-  pointer-events: all;
-}
-
-/* 页面内部布局：左图右字 */
-.page-content {
-  display: flex;
-  width: 100%;
-  height: 100%;
-  background: #fdfcf8; /* 书本纸张色 */
-  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-  border-radius: 10px;
-  overflow: hidden;
-  border: 1px solid #ddd;
-}
-
-/* 中间那条线（书脊感） */
-.page-content::before {
-  content: '';
+/* 每一页的正反面 */
+.page-front, .page-back {
   position: absolute;
-  left: 50%;
-  width: 2px;
-  height: 100%;
-  background: linear-gradient(to right, rgba(0,0,0,0.1), transparent, rgba(0,0,0,0.1));
-  z-index: 5;
-}
-
-.page-left, .page-right {
-  flex: 1;
-  width: 50%;
-  height: 100%;
-  position: relative;
-}
-
-.page-left img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  backface-visibility: hidden; /* 翻过去后隐藏正面 */
+  -webkit-backface-visibility: hidden;
 }
 
-.page-right {
-  padding: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #fcfaf2; /* 稍微深一点的纸张色 */
+.page-back {
+  background: #f0f0f0; /* 翻过去的背面颜色 */
+  transform: rotateY(180deg); /* 背面初始旋转180度 */
 }
 
-.text-box h3 {
-  font-size: 1.1rem;
-  color: #444;
-  margin-bottom: 8px;
-}
-
-.date {
-  font-size: 0.8rem;
-  color: #999;
-  font-family: 'Patrick Hand', cursive;
-  margin-bottom: 15px;
-}
-
-.text-box p {
-  font-size: 0.9rem;
-  line-height: 1.6;
-  color: #666;
-}
-
-/* 翻页动画：上一页往左翻走 */
+/* 当添加 flipped 类时，整页旋转 */
 .book-page.flipped {
   transform: rotateY(-180deg);
-  opacity: 0;
 }
 
+/* 这里的层级逻辑很重要：后方的页码 z-index 较低 */
+/* 我们用 JS 动态处理 z-index */
 /* ========================
    Footer
 ======================== */
