@@ -50,3 +50,4 @@ function createStar() {
   star.style.animationDuration = Math.random() * 5 + 5 + 's';
 
   document.que
+}
