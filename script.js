@@ -22,49 +22,40 @@ function openLetter() {
 // 相册翻页
 // =========================
 
-const pages = document.querySelectorAll('.book-page');
-
 let currentPage = 0;
+const pages = document.querySelectorAll('.book-page');
+const pageNumDisplay = document.getElementById('pageNum');
 
-
-
-function showPage(index) {
-
-  pages.forEach(page => {
-    page.classList.remove('show');
+function updateBook() {
+  pages.forEach((page, index) => {
+    page.classList.remove('active', 'flipped');
+    
+    if (index === currentPage) {
+      page.classList.add('active');
+    } else if (index < currentPage) {
+      page.classList.add('flipped');
+    }
   });
-
-  pages[index].classList.add('show');
-
-  document.getElementById('pageNum').innerText =
-    `${index + 1} / ${pages.length}`;
+  
+  pageNumDisplay.innerText = `${currentPage + 1} / ${pages.length}`;
 }
 
-
-
-function nextBook() {
-
-  if(currentPage < pages.length - 1) {
-
+function nextPage() {
+  if (currentPage < pages.length - 1) {
     currentPage++;
-
-    showPage(currentPage);
+    updateBook();
   }
 }
 
-
-
-function prevBook() {
-
-  if(currentPage > 0) {
-
+function prevPage() {
+  if (currentPage > 0) {
     currentPage--;
-
-    showPage(currentPage);
+    updateBook();
   }
 }
 
-
+// 初始化显示第一页
+updateBook();
 
 // =========================
 // 飘落星星
