@@ -1,35 +1,42 @@
-// 信封打开效果
-function openEnvelope() {
-  document.getElementById('envelope').classList.add('open');
+// 滚动到信件
+function scrollToLetter() {
+  document.getElementById("letter").scrollIntoView({ behavior: "smooth" });
 }
 
-// 翻页效果
-let currentPage = 1;
-const totalPages = document.querySelectorAll('.magazine-page').length;
+// 打开信件（已修复）
+function openLetter() {
+  const env = document.getElementById("envelope");
+  env.classList.add("open");
+}
 
-function updatePage() {
-  document.querySelectorAll('.magazine-page').forEach((page, index) => {
-    page.classList.remove('active');
-    if (index + 1 === currentPage) {
-      page.classList.add('active');
-    }
+// 翻页相册（已修复）
+let currentPage = 0;
+const pages = document.querySelectorAll(".book-page");
+const total = pages.length;
+
+function updateBookPage() {
+  pages.forEach((p, i) => {
+    p.classList.remove("show");
+    if (i === currentPage) p.classList.add("show");
   });
-  document.querySelector('.page-indicator').textContent = `${currentPage} / ${totalPages}`;
+  document.getElementById("pageNum").innerText = `${currentPage + 1} / ${total}`;
 }
 
-function nextPage() {
-  if (currentPage < totalPages) {
+function nextBook() {
+  if (currentPage < total - 1) {
     currentPage++;
-    updatePage();
+    updateBookPage();
   }
 }
 
-function prevPage() {
-  if (currentPage > 1) {
+function prevBook() {
+  if (currentPage > 0) {
     currentPage--;
-    updatePage();
+    updateBookPage();
   }
 }
+
+updateBookPage();
 function createStar() {
   const star = document.createElement('div');
   star.classList.add('star');
