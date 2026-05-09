@@ -1,3 +1,23 @@
+function openLetter() {
+
+  document
+    .getElementById('envelope')
+    .classList.toggle('open');
+}
+
+
+
+const pages = document.querySelectorAll('.book-page');
+
+let currentPage = 0;
+
+
+
+function showPage(index) {
+
+  pages.forEach(page => {
+    page.classList.remove('show');
+  });
 ```javascript
 function openLetter() {
 
@@ -49,7 +69,6 @@ function prevBook() {
     showPage(currentPage);
   }
 }
-```
 
 function createStar() {
   const star = document.createElement('div');
