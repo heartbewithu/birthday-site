@@ -3,12 +3,19 @@
 // =========================
 
 function openLetter() {
-
-  document
-    .getElementById('envelope')
-    .classList.toggle('open');
+  const envelope = document.getElementById('envelope');
+  const btn = document.querySelector('.open-btn');
+  
+  // 切换 .open 类名，触发 CSS 动画
+  envelope.classList.toggle('open');
+  
+  // 点击后更改按钮的文字
+  if (envelope.classList.contains('open')) {
+    btn.innerText = '收起信件💌';
+  } else {
+    btn.innerText = '点击开启信件💌';
+  }
 }
-
 
 
 // =========================
