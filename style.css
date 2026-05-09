@@ -202,143 +202,135 @@ button:hover {
    手写信
 ======================== */
 
+/* ========== 信封区域基础设置 ========== */
 .letter-section {
-
-  min-height: 100vh;
-
-  background:
-    linear-gradient(
-      to bottom,
-      #f3fbff,
-      #fff6fd
-    );
-
   display: flex;
   justify-content: center;
   align-items: center;
-
-  padding: 100px 20px;
+  min-height: 100vh;
+  /* 你可以把背景换成参考图里那种复古绿色，比如 background-color: #4a7c59; */
 }
 
-.envelope-container {
-  display: flex;
-  justify-content: center;
-}
-
-.envelope {
-
+.envelope-wrapper {
   position: relative;
-
-  width: 90%;
-  max-width: 700px;
-
-  background: #eaf5ff;
-
-  border-radius: 20px;
-
-  padding-top: 140px;
-
-  overflow: hidden;
-
-  box-shadow:
-    0 10px 40px rgba(0,0,0,0.1);
-}
-
-.envelope-flap {
-
-  position: absolute;
-
-  top: 0;
-  left: 0;
-
-  width: 100%;
-  height: 140px;
-
-  background: #bde2ff;
-
-  clip-path: polygon(
-    0 0,
-    100% 0,
-    50% 100%
-  );
-
-  z-index: 10;
-
-  transition: 0.8s;
-}
-
-.envelope.open .envelope-flap {
-  transform: translateY(-100%);
-}
-
-.letter-card-final {
-
-  background: white;
-
-  margin: 20px;
-
-  padding: 40px;
-
-  border-radius: 30px;
-
-  transform: scaleY(0);
-
-  transform-origin: top;
-
-  transition: 0.8s;
-}
-
-.envelope.open .letter-card-final {
-  transform: scaleY(1);
-}
-
-.letter-title {
-  text-align: center;
-  font-size: 3rem;
-  color: #6f8cff;
-  margin-bottom: 20px;
-}
-
-.letter-tag {
-
-  display: inline-block;
-
-  background: #ff9ed6;
-
-  color: white;
-
-  padding: 10px 20px;
-
-  border-radius: 30px;
-
-  margin-bottom: 25px;
-}
-
-.letter-content {
-
-  font-family: 'Patrick Hand', cursive;
-
-  font-size: 1.4rem;
-
-  line-height: 2;
-}
-
-.letter-content p {
-  margin-bottom: 20px;
-}
-
-.letter-stickers {
-  margin-top: 30px;
   display: flex;
-  gap: 15px;
-  font-size: 2rem;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
 }
 
+/* 固定信封的长宽，解决“信封太长”的问题 */
+.envelope {
+  position: relative;
+  width: 320px;
+  height: 220px;
+  background-color: #e1c699; /* 信封背面的底色 */
+  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+
+/* ========== 利用 CSS Border 画出信封的四个三角形折页 ========== */
+.envelope-top {
+  position: absolute;
+  top: 0; left: 0;
+  width: 0; height: 0;
+  border-left: 160px solid transparent;
+  border-right: 160px solid transparent;
+  border-top: 120px solid #d4b581; /* 上盖颜色稍微深一点 */
+  transform-origin: top; /* 设置旋转轴在顶部 */
+  transition: transform 0.6s ease-in-out, z-index 0.2s;
+  z-index: 4; /* 初始状态下盖子在最外层 */
+}
+
+.envelope-left {
+  position: absolute;
+  top: 0; left: 0;
+  width: 0; height: 0;
+  border-top: 110px solid transparent;
+  border-bottom: 110px solid transparent;
+  border-left: 160px solid #e8cd9e;
+  z-index: 3;
+}
+
+.envelope-right {
+  position: absolute;
+  top: 0; right: 0;
+  width: 0; height: 0;
+  border-top: 110px solid transparent;
+  border-bottom: 110px solid transparent;
+  border-right: 160px solid #e8cd9e;
+  z-index: 3;
+}
+
+.envelope-bottom {
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 0; height: 0;
+  border-left: 160px solid transparent;
+  border-right: 160px solid transparent;
+  border-bottom: 120px solid #ebd3a7;
+  z-index: 3;
+}
+
+/* ========== 信纸初始状态 ========== */
+.letter-paper {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  bottom: 10px; /* 初始被压在信封内 */
+  background-color: #fff;
+  z-index: 2; /* 在背景之上，在折页之下，实现“塞在里面”的效果 */
+  border-radius: 6px;
+  overflow: hidden; /* 确保背景图不会溢出圆角 */
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  transition: all 0.8s ease-in-out 0.3s; /* 延迟0.3秒，等上盖打开后再抽出 */
+}
+
+/* 自定义背景图自适应 */
+.letter-bg {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; /* 保证图片铺满且不变形 */
+  z-index: -1;
+  opacity: 0.9;
+}
+
+/* 文字内容区 */
+.letter-content {
+  padding: 20px;
+  height: 100%;
+  box-sizing: border-box;
+  overflow-y: auto; /* 如果文字太多，信纸内部可以滑动 */
+}
+
+/* ========== 打开后的动画状态 (.open) ========== */
+
+/* 1. 上盖翻转 180 度打开 */
+.envelope.open .envelope-top {
+  transform: rotateX(180deg);
+  z-index: 1; /* 打开后退到信纸后面 */
+}
+
+/* 2. 信纸向上抽出，并且拉长显示更多文字 */
+.envelope.open .letter-paper {
+  transform: translateY(-130px); /* 往上抽出的距离 */
+  height: 380px; /* 展开后的高度 */
+  z-index: 5; /* 抽出后覆盖在信封最前面 */
+}
+
+/* 按钮稍微美化一下 */
 .open-btn {
-  display: block;
-  margin: 30px auto 40px;
+  margin-top: 40px;
+  padding: 12px 30px;
+  background-color: #fff;
+  border: 2px solid #a1c4fd;
+  border-radius: 25px;
+  font-weight: bold;
+  color: #555;
+  cursor: pointer;
+  z-index: 10;
 }
-
 /* ========================
    相册翻页
 ======================== */
